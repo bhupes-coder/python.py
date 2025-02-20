@@ -1,0 +1,39 @@
+import re
+
+def extract_usernames(log_data):
+    # Regex pattern for extracting usernames
+    pattern = r'User: (\w+)'
+    
+    # Extract all usernames
+    return re.findall(pattern, log_data)
+
+def extract_unique_ips(log_data):
+    # Regex pattern for extracting IP addresses
+    pattern = r'IP: ([\d\.]+)'
+    
+    # Extract all IP addresses and return a set of unique IPs
+    return set(re.findall(pattern, log_data))
+
+def count_failed_attempts(log_data):
+    # Regex pattern for counting failed login attempts
+    pattern = r'Status: FAILED'
+    
+    # Count occurrences of 'Status: FAILED'
+    return len(re.findall(pattern, log_data))
+
+# Sample log data
+log_data = """
+[2025-02-10 14:23:45] User: Bhupesh IP: 192.168.1.101 Status: SUCCESS
+[2025-02-10 14:25:32] User: Aman IP: 192.168.1.105 Status: FAILED
+[2025-02-10 14:30:10] User: Jayant IP: 192.168.1.101 Status: FAILED
+[2025-02-10 14:35:25] User: Bishu IP: 192.168.1.200 Status: SUCCESS
+"""
+
+# Extract and print the results
+usernames = extract_usernames(log_data)
+unique_ips = extract_unique_ips(log_data)
+failed_attempts = count_failed_attempts(log_data)
+
+print("Usernames:", usernames)
+print("Unique IPs:", unique_ips)
+print("Failed Login Attempts:", failed_attempts)
